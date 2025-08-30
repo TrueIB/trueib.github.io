@@ -1,0 +1,121 @@
+:root {
+  --backgroundColor1: white;
+  --backgroundColor2: #f0f0f0;
+  --textColor: black;
+  --borderColor: black;
+  --backgroundColor1-hover: black;
+  --textColor-hover: white;
+}
+
+[data-subject="dark"] {
+  --backgroundColor1: #111;
+  --backgroundColor2: black;
+  --textColor: white;
+  --borderColor: white;
+  --backgroundColor1-hover: white;
+  --textColor-hover: black;
+}
+
+body {
+  font-size: 1.5rem;
+  font-family: Consolas, 'Courier New', monospace, sans-serif, serif;
+  color: var(--textColor);
+  overflow: hidden;
+}
+
+.main-content {
+  position: fixed;
+  left: 0;
+  top: 10%;
+  width: 100%;
+  height: 90%;
+}
+
+.main-content a {
+  color: blue;
+}
+
+.htmlDisplayArea {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.header {
+  background-color: var(--backgroundColor2);
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 10%;
+  z-index: 998;
+}
+
+.li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-content,
+.right-content {
+  align-items: center;
+  display: flex;
+}
+
+.menuButton,
+.subjectButton {
+  cursor: pointer;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -21rem;
+  width: 20rem;
+  height: 100%;
+  box-shadow: -3px 0 15px rgba(0, 0, 0, 1.0);
+  z-index: 1000;
+  background-color: var(--backgroundColor2);
+  border-radius: 0.2rem;
+  border-color: var(--borderColor);
+  overflow: auto;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.sidebar li {
+  cursor: pointer;
+  line-height: 2.5rem;
+}
+
+.sidebar li:hover {
+  background-color: var(--backgroundColor1-hover);
+  color: var(--textColor-hover);
+}
+
+.closeButton {
+  position: absolute;
+  top: 0.9rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  color: grey;
+}

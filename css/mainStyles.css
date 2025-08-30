@@ -1,0 +1,128 @@
+:root {
+  --backgroundColor1: white;
+  --backgroundColor2: #eeeeee;
+  --textColor: black;
+  --borderColor: black;
+  --backgroundColor1-hover: black;
+  --textColor-hover: white;
+  --borderColor-hover: white;
+}
+
+[data-subject="dark"] {
+  --backgroundColor1: #222;
+  --backgroundColor2: black;
+  --textColor: white;
+  --borderColor: white;
+  --backgroundColor1-hover: white;
+  --textColor-hover: black;
+  --borderColor-hover: black;
+}
+
+body {
+  font-size: 1.5rem;
+  background-color: var(--backgroundColor1);
+  font-family: Consolas, 'Courier New', monospace, sans-serif, serif;
+  color: var(--textColor);
+}
+
+.footer {
+  color: grey;
+  background-color: var(--backgroundColor2);
+  padding-top: 4rem;
+  padding-left: 1rem;
+  height: 3rem;
+}
+
+.h {
+  text-align: center;
+}
+
+h1.h {
+  text-align: center;
+  font-size: 3rem;
+}
+
+h3.h {
+  text-align: center;
+  font-size: 2rem;
+}
+
+a {
+  color: blue;
+}
+
+.statistics {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.statistics th {
+  border: 2px solid #eeeeee;
+  border-radius: 0.4rem;
+}
+
+.statistics td {
+  border: 2px solid #eeeeee;
+  border-radius: 0.4rem;
+}
+
+.projects {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.projects th {
+  border: 2px solid #eeeeee;
+  border-radius: 0.4rem;
+}
+
+.projects td {
+  border: 2px solid #eeeeee;
+  border-radius: 0.4rem;
+}
+
+.projects p {
+  padding-left: 1rem;
+}
+
+.projects strong {
+  padding-left: 1rem;
+}
+
+@media (max-width: 980px) {
+  body {
+    font-size: 1.2rem;
+  }
+
+  h1.h {
+    font-size: 2.4rem;
+  }
+
+  h3.h {
+    font-size: 1.6rem;
+  }
+
+  .footer {
+    height: 2.5rem;
+  }
+}
+
+@media (max-width: 798px) {
+  body {
+    font-size: 1rem;
+  }
+
+  h1.h {
+    font-size: 2rem;
+  }
+
+  h3.h {
+    font-size: 1.2rem;
+  }
+
+  .footer {
+    height: 2rem;
+  }
+}

@@ -1,0 +1,73 @@
+:root {
+  --backgroundColor1: white;
+  --backgroundColor2: #f0f0f0;
+  --textColor: black;
+  --borderColor: black;
+  --backgroundColor1-hover: black;
+  --textColor-hover: white;
+  --borderColor-hover: white;
+}
+
+[data-subject="dark"] {
+  --backgroundColor1: #222;
+  --backgroundColor2: black;
+  --textColor: white;
+  --borderColor: white;
+  --backgroundColor1-hover: white;
+  --textColor-hover: black;
+  --borderColor-hover: black;
+}
+
+body {
+  font-size: 1.5rem;
+  font-weight: 400;
+  background-color: var(--backgroundColor1);
+  font-family: Consolas, 'Courier New', monospace, sans-serif, serif;
+  color: var(--textColor);
+  overflow-x: hidden;
+}
+
+.footer {
+  text-align: center;
+  color: grey;
+  background-color: var(--backgroundColor2);
+  font-size: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border: 1px solid var(--borderColor);
+}
+
+pre {
+  background-color: var(--backgroundColor2);
+  color: var(--textColor);
+  border-radius: 0.5rem;
+  padding-left: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--borderColor);
+}
+
+code {
+  font-family: Consolas, 'Courier New', monospace;
+}
+
+.h {
+  text-align: center;
+}
+
+strong {
+  font-weight: 900;
+}
+
+@media (max-width: 980px) {
+  body {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 798px) {
+  body {
+    font-size: 1.0rem;
+  }
+}
