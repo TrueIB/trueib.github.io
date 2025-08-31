@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">9. 合并与连接</h1>
+  <p>就像 SQL 里的 JOIN 或者 Excel 里的 VLOOKUP。</p>
+  <pre><code># 假设有另一个表 df2，是关于学生身高的
+df2 = pd.DataFrame({'姓名': ['小明', '小红'], '身高': [175, 165]})
+
+# 将身高信息合并到成绩表 df 中
+df_merged = pd.merge(df, df2, on='姓名') # 根据“姓名”这一列进行合并</code></pre>
+  merge 默认是内连接（inner join），只保留两个表都有的姓名。还有左连接how='left'、右连接how='right'、外连接how='outer'。
+</body>
+
+</html>

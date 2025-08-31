@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">6. 随机数生成</h1>
+  <p>做模拟、初始化数据时非常有用，都在 np.random 模块里。</p>
+  <pre><code># 生成一个 [0.0, 1.0) 之间的随机浮点数
+print(np.random.rand())
+
+# 生成一个形状为 (2, 3) 的数组，值来自 [0.0, 1.0) 的均匀分布
+print(np.random.rand(2, 3))
+
+# 生成一个来自标准正态分布（均值为0，标准差为1）的样本
+print(np.random.randn())
+
+# 生成一个形状为 (2, 3) 的数组，值来自标准正态分布
+print(np.random.randn(2, 3))
+
+# 生成一个 [low, high) 之间的随机整数
+# np.random.randint(low, high=None, size=None)
+print(np.random.randint(5))        # [0, 5) 之间的一个整数
+print(np.random.randint(1, 10))    # [1, 10) 之间的一个整数
+print(np.random.randint(1, 10, size=5)) # 5个这样的整数，形成一维数组
+print(np.random.randint(1, 10, size=(2, 3))) # 2行3列的数组
+
+# 从给定的数组里随机选择
+arr = np.array([10, 20, 30, 40, 50])
+print(np.random.choice(arr, size=3)) # 从arr里随机选3个数
+print(np.random.choice(arr, size=(2, 3))) # 选成一个2x3的矩阵
+
+# 打乱数组的顺序（原地操作）
+np.random.shuffle(arr)
+print(arr) # 原来的arr顺序被打乱了</code></pre>
+</body>
+
+</html>

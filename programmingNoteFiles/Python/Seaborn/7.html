@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">7.实战案例</h1>
+  <strong>案例：分析鸢尾花数据集</strong>
+  <pre><code>iris = sns.load_dataset("iris")
+print(iris.head())
+
+# 1. 总体关系概览
+sns.pairplot(iris, hue="species")
+plt.show()
+
+# 2. 深入研究两个关键特征
+g = sns.relplot(
+    data=iris, kind="scatter",
+    x="sepal_length", y="petal_length",
+    hue="species", col="species", # 按物种分列，更清晰地比较
+    height=5
+)
+plt.show()
+
+# 3. 分布比较
+plt.figure(figsize=(12, 4))
+plt.subplot(1, 2, 1)
+sns.boxplot(data=iris, x="species", y="sepal_width")
+plt.subplot(1, 2, 2)
+sns.violinplot(data=iris, x="species", y="sepal_width")
+plt.tight_layout()
+plt.show()</code></pre>
+</body>
+
+</html>
