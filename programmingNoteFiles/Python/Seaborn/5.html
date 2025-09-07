@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">5. 精细化样式控制</h1>
+  <p>Seaborn 与 Matplotlib 对象完美兼容，你可以随时用 Matplotlib 的命令进行精细化调整。</p>
+  <dl>
+    <dt>1. 使用 Matplotlib 对象</dt>
+    <dd>
+      所有 Axes-level 函数返回 Matplotlib Axes 对象，所有 Figure-level 函数返回 FacetGrid 对象，你可以对它们进行操作。
+      <pre><code># 对于 Axes-level 图
+fig, ax = plt.subplots(figsize=(10, 6))
+ax = sns.scatterplot(data=tips, x="total_bill", y="tip", ax=ax) # 传入已有的 ax
+ax.set_title("My Detailed Title") # 使用 Matplotlib 方法设置标题
+ax.set_xlabel("Bill ($)")
+ax.set_ylabel("Tip ($)")
+ax.set_xlim(0, 60)
+plt.show()
+
+# 对于 Figure-level 图 (g 是 FacetGrid 对象)
+g = sns.catplot(data=tips, x="day", y="total_bill", kind="box")
+g.fig.suptitle("Overall Figure Title") # 设置整个图形的标题
+g.set_axis_labels("Day of Week", "Total Bill (USD)") # 设置所有子图的轴标签
+# 遍历每个子图 axes 进行精细控制
+for ax in g.axes.flat:
+    ax.set_title(ax.get_title(), fontstyle='italic')
+plt.tight_layout()
+plt.show()</code></pre>
+    </dd>
+    <dt>2. 颜色控制</dt>
+    <dd>
+      <ul>
+        <li>
+          设置调色板: sns.set_palette(“pastel”) (全局) 或 palette 参数 (单图)
+          <pre><code>sns.barplot(data=tips, x="day", y="total_bill", palette="rocket")</code></pre>
+        </li>
+        <li>
+          使用颜色循环:
+          <pre><code>colors = ["#FF9999", "#66B2FF"] # 自定义颜色列表
+sns.barplot(data=tips, x="day", y="total_bill", hue="sex", palette=colors)</code></pre>
+        </li>
+        <li>
+          使用 Colormap (适用于连续数据):
+          <pre><code>sns.scatterplot(data=tips, x="total_bill", y="tip", hue="size", size="size", palette="viridis")</code></pre>
+        </li>
+      </ul>
+    </dd>
+  </dl>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">4. 检查与概览</h1>
+  <p>拿到数据第一步，先看一看它的属性。</p>
+  <pre><code>df.head(3)      # 看前3行，默认是5行
+df.tail()       # 看最后几行
+df.shape        # 看表格形状，(行数， 列数)
+df.columns      # 看所有列名
+df.index        # 看所有行索引
+df.dtypes       # 看每一列的数据类型（int, float, object字符串）
+df.info()       # 信息大汇总，行数、列数、数据类型、内存占用
+df.describe()   # 数字列的统计摘要，计数、均值、标准差、最小最大值、分位数</code></pre>
+</body>
+
+</html>

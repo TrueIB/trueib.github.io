@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">2. 广播机制</h1>
+  <p>广播是 NumPy 允许<strong>不同形状</strong>数组进行数学运算的一套规则。它的核心思想是<strong>自动扩展较小的数组，使其与较大数组的形状兼容。</strong></p>
+  <p>广播规则：</p>
+  <ol>
+    <li>从<strong>最右边</strong>的维度开始，比较两个数组的形状。</li>
+    <li>维度必须<strong>相等</strong>，或者其中一个<strong>为 1</strong>，或者其中一个数组<strong>没有</strong>这个维度。</li>
+    <li>如果满足条件，较小的数组会在缺失或长度为1的维度上进行“广播”复制，以匹配大数组的形状。</li>
+  </ol>
+  <dl>
+    <dt>例子是最好的老师：</dt>
+    <dt>例子1：标量与数组（最简单）</dt>
+    <dd>
+      <pre><code>a = np.array([1, 2, 3])
+result = a + 5 # 标量5被广播成 [5, 5, 5]
+# a.shape: (3,)
+# 5.shape: () -> 被视为 (1,) -> 再广播为 (3,)</code></pre>
+    </dd>
+    <dt>例子2：一维数组与二维数组</dt>
+    <dd>
+      <pre><code>a = np.arange(3) # shape: (3,) -> [0, 1, 2]
+b = np.ones((3, 2)) # shape: (3, 2)
+result = a[:, np.newaxis] + b # 正确做法：需要手动为a添加一个新轴
+# 或者 result = a.reshape(3, 1) + b
+
+# 如果不加新轴，直接 a + b 会失败，因为 (3,) 和 (3,2) 不兼容。
+# a: (3,) -> 尝试广播为 (1, 3) -> 与b的(3,2)比较，3 != 2，失败。
+
+# 正确流程：
+# a[:, np.newaxis] 后 shape 变为 (3, 1)
+# b 的 shape 是 (3, 2)
+# 比较维度：从右开始
+#   第1维：a是1，b是2 -> 兼容，将a的这一维广播为2
+#   第0维：a是3，b是3 -> 相等，兼容
+# 最终a被广播为 [[0, 0], [1, 1], [2, 2]]
+# 然后与b相加</code></pre>
+    </dd>
+    <dt>例子3：两个都需要广播</dt>
+    <dd>
+      <pre><code>a = np.arange(3).reshape(3, 1) # shape: (3, 1) -> [[0], [1], [2]]
+b = np.arange(3) # shape: (3,) -> [0, 1, 2]
+result = a + b
+# 步骤：
+# a: (3, 1)
+# b: (3,) -> 先添加一个前置维度 -> (1, 3)
+# 现在比较 (3, 1) 和 (1, 3)
+#   第1维：a是1，b是3 -> 兼容，将a的这一维广播为3
+#   第0维：a是3，b是1 -> 兼容，将b的这一维广播为3
+# 最终a被广播为 [[0, 0, 0], [1, 1, 1], [2, 2, 2]]
+# 最终b被广播为 [[0, 1, 2], [0, 1, 2], [0, 1, 2]]
+# 然后相加 -> [[0, 1, 2], [1, 2, 3], [2, 3, 4]]</code></pre>
+    </dd>
+  </dl>
+  <p>np.newaxis 或 None 是用来增加数组维度的关键工具。</p>
+  <pre><code>a = np.array([1, 2, 3])
+print(a.shape) # (3,)
+
+# 增加一个行维度，变成列向量
+col_vector = a[:, np.newaxis]
+print(col_vector.shape) # (3, 1)
+print(col_vector)
+# [[1]
+#  [2]
+#  [3]]
+
+# 增加一个列维度，变成行向量
+row_vector = a[np.newaxis, :]
+print(row_vector.shape) # (1, 3)
+print(row_vector)
+# [[1 2 3]]</code></pre>
+</body>
+
+</html>

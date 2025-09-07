@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">7. 排序与筛选</h1>
+  <dl>
+    <dt>1. 排序</dt>
+    <dd>
+      <pre><code>df.sort_values(by='语文')          # 按“语文”成绩升序排序
+df.sort_values(by='语文', ascending=False) # 降序排序
+df.sort_values(by=['语文', '数学'], ascending=[True, False]) # 先按语文升序，语文一样再按数学降序</code></pre>
+    </dd>
+    <dt>2. 条件筛选（超级重要！）</dt>
+    <dd>
+      <pre><code># 单条件筛选：语文成绩大于90的同学
+df[df['语文'] > 90]
+
+# 多条件筛选：语文大于90并且数学大于85
+df[(df['语文'] > 90) & (df['数学'] > 85)]
+
+# 语文大于90或者数学大于85
+df[(df['语文'] > 90) | (df['数学'] > 85)]
+
+# 模糊筛选：筛选姓名中包含“小”的同学
+df[df['姓名'].str.contains('小')]</code></pre>
+      <strong>注意：</strong>多个条件之间要用 & (和)、| (或) 连接，每个条件要用括号括起来。
+    </dd>
+  </dl>
+</body>
+
+</html>
