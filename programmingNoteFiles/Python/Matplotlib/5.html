@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">5. 面向对象接口</h1>
+  <p>刚才我们一直用的是 plt.xxx() 的方式，这叫<strong>pyplot
+      接口</strong>，简单快捷，画点小图没问题。但要画复杂的、精细控制的图，你必须了解它的<strong>内功心法——面向对象接口</strong>。</p>
+  <strong>核心概念：Figure 和 Axes</strong>
+  <ul>
+    <li>Figure（图形）： 就是那张<strong>画布</strong>。你可以创建一张大画布（plt.figure()）。</li>
+    <li>Axes（坐标系）： 画布上的一个<strong>子图</strong>。一张画布上可以有很多个子图（Axes）。</li>
+  </ul>
+  <p>plt.plot() 其实是“隐式”地在当前最新的 Figure 和 Axes 上作图。而面向对象的方式是“显式”地控制。</p>
+  <pre><code># 显式创建画布(fig)和坐标系(ax)
+fig, ax = plt.subplots(figsize=(10, 5)) # 1行1列的子图，也就是一个图
+
+# 现在所有“打扮”函数都从 plt.xxx 变成了 ax.set_xxx
+ax.plot(x, y, label='Sin(x)')
+ax.set_title('OO Style Sine Wave')
+ax.set_xlabel('X Axis')
+ax.set_ylabel('Y Axis')
+ax.legend()
+ax.grid(True)
+
+plt.show()</code></pre>
+  <p>代码量似乎差不多，但它的威力在于画子图。</p>
+  <pre><code># 创建一张画布，包含2x2=4个子图
+fig, axs = plt.subplots(nrows=2, ncols=2, figsize=(10, 8)) # axs 是一个2x2的数组
+
+# 在第一个子图（左上角）上画图
+axs[0, 0].plot(x, np.sin(x))
+axs[0, 0].set_title('Sine')
+
+# 在第二个子图（右上角）上画图
+axs[0, 1].plot(x, np.cos(x), 'r--') # 'r--' 是红色虚线
+axs[0, 1].set_title('Cosine')
+
+# 在第三个子图（左下角）上画图
+axs[1, 0].scatter(height, weight)
+axs[1, 0].set_title('Scatter')
+
+# 在第四个子图（右下角）上画图
+axs[1, 1].hist(scores, bins=30)
+axs[1, 1].set_title('Histogram')
+
+# 自动调整子图布局，防止重叠
+plt.tight_layout()
+plt.show()</code></pre>
+  <p><strong>强烈建议：</strong>从入门开始就尽量使用 fig, ax = plt.subplots() 这种面向对象的方式。</p>
+</body>
+
+</html>
