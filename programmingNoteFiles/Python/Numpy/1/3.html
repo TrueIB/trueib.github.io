@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">3. 索引和切片</h1>
+  <p>这部分和列表非常像，但是更强大，尤其是对多维数组。</p>
+  <dl>
+    <dt>1. 一维数组（和列表几乎一模一样）</dt>
+    <dd>
+      <pre><code>arr = np.array([10, 20, 30, 40, 50])
+
+print(arr[0])   # 获取第0个元素。输出：10
+print(arr[-1])  # 获取最后一个元素。输出：50
+print(arr[1:4]) # 切片，获取第1到第3个元素（索引4不包括）。输出：[20 30 40]
+print(arr[::2]) # 从头到尾，步长为2。输出：[10 30 50]</code></pre>
+    </dd>
+    <dt>2. 二维数组（行和列）</dt>
+    <dd>
+      语法是 arr[行操作， 列操作]。
+      <pre><code>arr2d = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+
+# 取第0行（第一个维度是行）
+print(arr2d[0])     # 输出：[1 2 3]
+
+# 取第0行第1列的元素
+print(arr2d[0, 1])  # 输出：2
+
+# 取第1行之后的所有行，以及第1列之后的所有列
+print(arr2d[1:, 1:])
+# 输出：
+# [[5 6]
+#  [8 9]]
+
+# 取所有行的第0列（这相当于取第一列）
+print(arr2d[:, 0])  # 输出：[1 4 7]</code></pre>
+      <strong>重要概念：轴（Axis）</strong>
+      可以把二维数组想象成一个坐标系：
+      <ul>
+        <li>axis=0：代表<strong>行</strong>的方向，从上到下。<strong>arr.sum(axis=0)</strong>表示对每一<strong>列</strong>进行求和（沿着行方向压扁）。</li>
+        <li>axis=1：代表<strong>列</strong>的方向，从左到右。<strong>arr.sum(axis=1)</strong>表示对每一<strong>行</strong>进行求和（沿着列方向压扁）。</li>
+      </ul>
+    </dd>
+  </dl>
+</body>
+
+</html>

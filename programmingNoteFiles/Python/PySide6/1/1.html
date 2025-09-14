@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">1. 准备工作</h1>
+  <dl>
+    <dt>1. 安装</dt>
+    <dd>
+      打开cmd窗口，输入以下命令安装：
+      <pre><code>pip install pyside6</code></pre>
+      如果下载慢，可以指定国内源：
+      <pre><code>pip install pyside6 -i https://pypi.tuna.tsinghua.edu.cn/simple</code></pre>
+    </dd>
+    <dt>2. 导入</dt>
+    <dd>
+      安装完成后，在代码中导入它。按照惯例，一般用from ... import ...的方法：
+      <pre><code>from pyside6 import ...</code></pre>
+    </dd>
+    <dt>3. 第一个窗口</dt>
+    <dd>
+      让我们写一个最简单的程序，它的目标就是显示一个窗口。创建一个新的 Python 文件，比如叫 my_first_app.py。
+      <pre><code># 导入我们需要的类。刚开始先记住这么引入就行。
+from PySide6.QtWidgets import QApplication, QMainWindow
+import sys
+
+# 任何 PySide6 程序都必须先创建一个 QApplication 实例。
+# 你可以把它想象成你的应用程序的“发动机”或者“总管家”。
+# sys.argv 是用来处理命令行参数的，我们先照写就行。
+app = QApplication(sys.argv)
+
+# 创建一个主窗口。QMainWindow 是一种带菜单栏、状态栏的标准窗口。
+window = QMainWindow()
+# 设置窗口的标题
+window.setWindowTitle("我的第一个PySide6程序")
+# 设置窗口的初始大小（宽，高）
+window.resize(400, 300)
+
+# 非常重要的一步：让窗口显示出来！
+# 默认情况下，创建的窗口是隐藏的，需要调用 .show() 来显示。
+window.show()
+
+# 最后，启动应用程序的事件循环，让程序开始运行。
+# 这行代码会阻塞在这里，直到你关闭所有窗口。
+# app.exec() 会返回一个退出码，我们把它传给 sys.exit() 来优雅地退出程序。
+sys.exit(app.exec())</code></pre>
+      保存并运行这个 Python 文件：
+      <pre><code>python my_first_app.py</code></pre>
+      可以看到弹出了一个窗口。
+    </dd>
+  </dl>
+</body>
+
+</html>

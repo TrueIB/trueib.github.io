@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">4. 对话框</h1>
+  <p>对话框是与用户进行简短交互的重要方式。</p>
+  <dl>
+    <dt>1. 标准对话框（文件选择、颜色选择等）</dt>
+    <dd>
+      <pre><code>from PySide6.QtWidgets import QFileDialog, QColorDialog, QMessageBox
+
+# 文件对话框
+file_path, _ = QFileDialog.getOpenFileName(
+    self, # 父窗口
+    "选择文件", # 标题
+    "", # 起始目录
+    "Images (*.png *.jpg);;All Files (*)" # 文件过滤器
+)
+if file_path:
+    print(f"你选择了文件: {file_path}")
+
+# 颜色对话框
+color = QColorDialog.getColor()
+if color.isValid():
+    print(f"你选择的颜色RGB值是: {color.getRgb()}")
+
+# 消息对话框（提示信息）
+QMessageBox.information(self, "操作成功", "文件已保存！")
+
+# 消息对话框（询问，有确定和取消按钮）
+reply = QMessageBox.question(
+    self,
+    "确认删除",
+    "你确定要删除这个项目吗？",
+    QMessageBox.Yes | QMessageBox.No
+)
+if reply == QMessageBox.Yes:
+    print("用户选择了删除")
+else:
+    print("用户取消了删除")</code></pre>
+    </dd>
+    <dt>2. 自定义对话框</dt>
+    <dd>
+      <ul>
+        <li>在 Qt Designer 中创建一个新的 Dialog 模板，设计界面，保存为 .ui 文件。</li>
+        <li>用 pyside6-uic 命令生成 .py 文件。</li>
+        <li>在主程序中创建并使用它。</li>
+      </ul>
+      <pre><code>from PySide6.QtWidgets import QDialog
+from ui_mydialog import Ui_Dialog # 导入生成的对话框UI类
+
+class MyDialog(QDialog, Ui_Dialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setupUi(self)
+        # 连接对话框自身的按钮信号
+        self.ok_button.clicked.connect(self.accept)
+        self.cancel_button.clicked.connect(self.reject)
+
+# 在主窗口中使用自定义对话框
+def show_custom_dialog(self):
+    dialog = MyDialog(self) # self 作为父窗口
+    result = dialog.exec() # 以模态方式显示对话框，会阻塞
+    if result == QDialog.Accepted:
+        print("用户点击了OK")
+        print(f"输入的内容是: {dialog.line_edit.text()}")
+    else:
+        print("用户点击了Cancel")</code></pre>
+    </dd>
+  </dl>
+</body>
+
+</html>

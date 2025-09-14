@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="1/styles.css">
+  <script type="text/javascript" src="1/config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">附：PySide6 所有控件一览表</h1>
+  <table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+      <tr>
+        <th>控件类别</th>
+        <th>控件名称</th>
+        <th>主要功能与描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th rowspan="10">基础输入/显示</td>
+        <td>QLabel</td>
+        <td>显示文本或图像</td>
+      </tr>
+      <tr>
+        <td>QPushButton</td>
+        <td>创建可点击的按钮，响应点击事件</td>
+      </tr>
+      <tr>
+        <td>QLineEdit</td>
+        <td>单行文本输入框，允许用户输入和编辑单行纯文本</td>
+      </tr>
+      <tr>
+        <td>QTextEdit</td>
+        <td>多行富文本输入和显示控件，支持文本格式、剪切/复制/粘贴等</td>
+      </tr>
+      <tr>
+        <td>QCheckBox</td>
+        <td>复选框，允许用户选择或取消一个选项</td>
+      </tr>
+      <tr>
+        <td>QRadioButton</td>
+        <td>单选按钮，一组中只能选择一个</td>
+      </tr>
+      <tr>
+        <td>QComboBox</td>
+        <td>下拉选择框，允许用户从预定义选项中选择一个</td>
+      </tr>
+      <tr>
+        <td>QSpinBox / QDoubleSpinBox</td>
+        <td>数字输入框，允许用户通过点击箭头或输入来选择整数值或浮点数值</td>
+      </tr>
+      <tr>
+        <td>QSlider</td>
+        <td>滑动条，允许用户通过拖动滑块在一个范围内选择一个值</td>
+      </tr>
+      <tr>
+        <td>QProgressBar</td>
+        <td>进度条，显示操作的进度或状态</td>
+      </tr>
+      <tr>
+        <th rowspan="4">高级数据展示</td>
+        <td>QListWidget</td>
+        <td>显示和管理列表数据，每个项目可包含文本、图像或自定义控件</td>
+      </tr>
+      <tr>
+        <td>QTableWidget</td>
+        <td>显示和编辑表格数据，支持排序、搜索等功能</td>
+      </tr>
+      <tr>
+        <td>QTreeWidget</td>
+        <td>显示层级结构（树形）数据</td>
+      </tr>
+      <tr>
+        <td>QListView, QTableView, QTreeView</td>
+        <td>基于Model/View架构的视图控件，用于更灵活地处理数据</td>
+      </tr>
+      <tr>
+        <th rowspan="6">容器与布局</td>
+        <td>QWidget</td>
+        <td>所有用户界面对象的基类，可作为容器容纳其他控件</td>
+      </tr>
+      <tr>
+        <td>QGroupBox</td>
+        <td>分组框，用于将相关控件组织在一起</td>
+      </tr>
+      <tr>
+        <td>QTabWidget</td>
+        <td>标签页控件，用于在同一窗口区域内切换不同内容</td>
+      </tr>
+      <tr>
+        <td>QStackedWidget</td>
+        <td>堆叠窗口，一次只显示一个子控件</td>
+      </tr>
+      <tr>
+        <td>QFrame</td>
+        <td>提供了一个框架，可以用于绘制边框和背景，也作为其他定制控件的基类</td>
+      </tr>
+      <tr>
+        <td>QScrollArea</td>
+        <td>提供滚动视图，用于显示大于视图区域的控件</td>
+      </tr>
+      <tr>
+        <th rowspan="4">布局管理器</td>
+        <td>QHBoxLayout</td>
+        <td>水平布局管理器，将控件按水平方向排列</td>
+      </tr>
+      <tr>
+        <td>QVBoxLayout</td>
+        <td>垂直布局管理器，将控件按垂直方向排列</td>
+      </tr>
+      <tr>
+        <td>QGridLayout</td>
+        <td>网格布局管理器，将控件按行和列排列</td>
+      </tr>
+      <tr>
+        <td>QFormLayout</td>
+        <td>表单布局管理器，常用于管理标签和输入字段的成对排列</td>
+      </tr>
+      <tr>
+        <th rowspan="7">对话框与窗口</td>
+        <td>QDialog</td>
+        <td>对话框窗口的基类</td>
+      </tr>
+      <tr>
+        <td>QMainWindow</td>
+        <td>主窗口类，通常包含菜单栏、工具栏、状态栏和中央部件</td>
+      </tr>
+      <tr>
+        <td>QMessageBox</td>
+        <td>消息对话框，用于显示提示、警告、错误信息或询问用户</td>
+      </tr>
+      <tr>
+        <td>QFileDialog</td>
+        <td>文件对话框，用于选择打开或保存的文件</td>
+      </tr>
+      <tr>
+        <td>QColorDialog</td>
+        <td>颜色选择对话框</td>
+      </tr>
+      <tr>
+        <td>QFontDialog</td>
+        <td>字体选择对话框</td>
+      </tr>
+      <tr>
+        <td>QInputDialog</td>
+        <td>输入对话框，用于获取用户的简单输入（如文本、数字）</td>
+      </tr>
+      <tr>
+        <th rowspan="5">菜单、工具栏</td>
+        <td>QMenu</td>
+        <td>菜单</td>
+      </tr>
+      <tr>
+        <td>QMenuBar</td>
+        <td>菜单栏</td>
+      </tr>
+      <tr>
+        <td>QToolBar</td>
+        <td>工具栏</td>
+      </tr>
+      <tr>
+        <td>QStatusBar</td>
+        <td>状态栏</td>
+      </tr>
+      <tr>
+        <td>QAction</td>
+        <td>动作，可用于菜单项、工具栏按钮等，集中处理用户操作</td>
+      </tr>
+      <tr>
+        <th rowspan="4">其他专用</td>
+        <td>QDateEdit / QDateTimeEdit</td>
+        <td>日期和时间编辑控件</td>
+      </tr>
+      <tr>
+        <td>QCalendarWidget</td>
+        <td>日历控件</td>
+      </tr>
+      <tr>
+        <td>QLCDNumber</td>
+        <td>液晶数字显示控件</td>
+      </tr>
+      <tr>
+        <td>QWebEngineView</td>
+        <td>用于显示网页内容</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>
