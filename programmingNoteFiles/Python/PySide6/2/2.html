@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">2. 多线程</h1>
+  <p>在 GUI 程序中，如果你在执行一个耗时的任务（如大量计算、网络请求、文件读写），界面会“卡住”，直到任务完成。这是因为耗时任务阻塞了主线程（也就是事件循环所在的线程）。</p>
+  <p>解决方案：使用<strong>工作线程（Worker Thread）</strong>。</p>
+  <strong>示例：使用 QThread 和 Signal 实现多线程</strong>
+  <pre><code>from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QTextEdit, QVBoxLayout, QWidget
+from PySide6.QtCore import QThread, Signal
+import time
+import sys
+
+# 1. 创建一个工作线程类，它继承自 QThread
+class WorkerThread(QThread):
+    # 2. 定义一个信号，用于在工作完成时向主线程报告结果（或进度）
+    # Signal(str) 表示这个信号会发送一个字符串
+    progress_signal = Signal(str)
+    finished_signal = Signal(str)
+
+    def run(self):
+        """这是线程的主要执行逻辑，重写 run 方法。"""
+        self.progress_signal.emit("线程开始执行...")
+        for i in range(5):
+            # 模拟一个耗时任务，比如下载文件的一部分
+            time.sleep(1) # 睡眠1秒，模拟耗时
+            self.progress_signal.emit(f"正在处理第 {i+1}/5 部分...")
+        self.finished_signal.emit("耗时任务已完成！")
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("多线程示例")
+        self.resize(400, 300)
+
+        self.text_edit = QTextEdit()
+        self.button = QPushButton("开始耗时任务")
+        self.button.clicked.connect(self.start_long_task)
+
+        layout = QVBoxLayout()
+        layout.addWidget(self.text_edit)
+        layout.addWidget(self.button)
+
+        central_widget = QWidget()
+        central_widget.setLayout(layout)
+        self.setCentralWidget(central_widget)
+
+    def start_long_task(self):
+        self.text_append("主线程：点击按钮，准备启动工作线程。")
+        # 禁用按钮，防止用户多次点击启动多个线程
+        self.button.setEnabled(False)
+
+        # 3. 创建并启动工作线程
+        self.worker_thread = WorkerThread()
+        # 连接工作线程的信号到主窗口的槽函数
+        self.worker_thread.progress_signal.connect(self.update_progress)
+        self.worker_thread.finished_signal.connect(self.task_finished)
+        # 启动线程
+        self.worker_thread.start()
+
+    def update_progress(self, message):
+        # 这个槽函数在工作线程发射 progress_signal 时被调用
+        # 它在主线程中执行，所以可以安全地更新UI
+        self.text_append(message)
+
+    def task_finished(self, message):
+        self.text_append(message)
+        self.button.setEnabled(True) # 任务完成，重新启用按钮
+        # 清理线程对象
+        self.worker_thread = None
+
+    def text_append(self, text):
+        self.text_edit.append(text)
+
+app = QApplication(sys.argv)
+window = MainWindow()
+window.show()
+sys.exit(app.exec())</code></pre>
+  <strong>关键点：</strong>
+  <ul>
+    <li><strong>绝对不要在子线程中直接操作UI</strong>（如 self.text_append(message)）。UI操作必须在主线程中进行。</li>
+    <li>线程间的通信<strong>必须通过信号（Signal）</strong> 来完成。工作线程发射信号，主线程的槽函数接收并处理。</li>
+    <li>这样可以保证在执行耗时任务时，主界面依然可以响应用户的操作（如移动窗口、点击其他按钮）。</li>
+  </ul>
+</body>
+
+</html>

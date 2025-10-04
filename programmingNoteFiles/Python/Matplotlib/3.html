@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">3. 添加基础元素</h1>
+  <p>现在图是有了，但缺标题、缺标签，看不明白。我们来给它添加一些元素。</p>
+  <pre><code>plt.figure(figsize=(10, 5)) # 先创建一个新的图形，并设置大小（宽10英寸，高5英寸）
+
+plt.plot(x, y, label='Sin(x)') # 画线，并给这条线起个名字叫'Sin(x)'
+plt.title('My First Cool Sine Wave') # 给整个图加标题
+plt.xlabel('X Axis') # 给X轴加标签
+plt.ylabel('Y Axis') # 给Y轴加标签
+plt.legend() # 显示图例（就是那个写着'Sin(x)'的小框）
+
+plt.grid(True) # 加上网格线
+plt.show()</code></pre>
+  <strong>常用函数总结：</strong>
+  <ul>
+    <li>plt.title()：标题</li>
+    <li>plt.xlabel() / plt.ylabel()：X/Y轴标签</li>
+    <li>plt.xlim() / plt.ylim()：设置X/Y轴显示范围</li>
+    <li>plt.legend()：显示图例（需要先在plot里用label参数指定名称）</li>
+    <li>plt.grid()：网格线</li>
+  </ul>
+
+</body>
+
+</html>

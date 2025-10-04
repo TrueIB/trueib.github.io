@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">2. 信号与槽</h1>
+  <p>这是 Qt/PySide6 <strong>最核心</strong>的概念，它用于对象之间的通信。</p>
+  <ul>
+    <li><strong>信号（Signal）</strong>：当一个事件发生时（比如按钮被点击了），控件会“发射”一个信号。</li>
+    <li><strong>槽（Slot）</strong>：响应信号的函数。就像有人听到了喊声，然后做出相应的动作。<strong>槽就是一个普通的 Python 函数</strong>。</li>
+  </ul>
+  <p>PySide6 的控件有很多内置信号（如 clicked, textChanged），也可以为它们连接（connect）自定义的槽函数。</p>
+  <br>
+  <strong>例子：添加一个按钮</strong>
+  <p>我们来改造上面的程序，添加一个按钮，点击它会在控制台打印一句话。</p>
+  <pre><code>from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton
+import sys
+
+# 定义一个槽函数。它就是一个普通函数。
+def button_clicked():
+    print("click")
+
+app = QApplication(sys.argv)
+
+window = QMainWindow()
+window.setWindowTitle("信号与槽示例")
+window.resize(400, 300)
+
+# 1. 创建一个按钮控件。
+# 参数是显示在按钮上的文字。它的父控件是 window，意味着它显示在 window 里面。
+button = QPushButton("点击按钮", window)
+# 2. 移动按钮到窗口的 (150, 130) 坐标位置
+button.move(150, 130)
+
+# 3. 最重要的部分：连接信号与槽！
+# 按钮对象有一个名叫 `clicked` 的信号（被点击时发射）。
+# 我们使用 .connect() 方法，将这个信号连接到我们上面定义的 `button_clicked` 函数（槽）。
+button.clicked.connect(button_clicked)
+
+window.show()
+sys.exit(app.exec())</code></pre>
+  <p>运行这个程序，点击按钮，看看你的命令行终端里是不是输出了“click”。</p>
+  <strong>这个过程就是：</strong>
+  <p>用户点击按钮 -> 按钮发射 clicked 信号 -> 由于我们之前用 .connect() 把信号和 button_clicked 函数连接起来了 -> 所以 button_clicked 函数被自动调用。</p>
+</body>
+
+</html>

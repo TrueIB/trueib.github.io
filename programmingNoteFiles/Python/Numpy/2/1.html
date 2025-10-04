@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">1. 视图与副本</h1>
+  <p>这是 NumPy 高级编程中最重要的概念之一，理解它能避免很多意想不到的 bug。</p>
+  <ul>
+    <li>副本（Copy）：数据的完整拷贝，新旧数组不共享内存。对副本的操作不会影响原数组。使用 .copy() 方法创建。</li>
+    <li>视图（View）：数据的另一种查看方式，新旧数组共享内存。对视图的操作会直接改变原数组。很多操作都会创建视图，如切片、reshape()、ravel()（默认）。</li>
+  </ul>
+  <pre><code>import numpy as np
+
+# 原数组
+a = np.arange(10) # [0 1 2 3 4 5 6 7 8 9]
+
+# --- 创建视图的例子 ---
+# 1. 切片操作产生视图
+b = a[3:7] # 获取a的一个切片 [3, 4, 5, 6]
+b[0] = 100 # 修改视图b的第一个元素
+print(a) # 输出：[ 0 1 2 100 4 5 6 7 8 9] -> 原数组a也被修改了！
+
+# 2. .reshape() 产生视图
+a = np.arange(12)
+c = a.reshape(3, 4) # c是a的一个视图
+c[0, 0] = 99
+print(a[0]) # 输出：99 -> 原数组a也被修改了
+
+# 3. .ravel() 默认产生视图
+d = c.ravel()
+d[1] = 88
+print(c[0, 1]) # 输出：88 -> 原二维数组c也被修改了
+
+# --- 创建副本的例子 ---
+# 使用 .copy() 方法显式创建副本
+a = np.arange(10)
+b = a[3:7].copy() # 创建切片的副本
+b[0] = 100
+print(a) # 输出：[0 1 2 3 4 5 6 7 8 9] -> 原数组a未被修改
+
+# 判断是视图还是副本
+print(b.base is a) # 输出：False -> b不是a的视图，它是独立的
+print(c.base is a) # 输出：True -> c是a的视图</code></pre>
+  <ul>
+    <li>当你需要保护原数据不被意外修改时，使用 .copy()。</li>
+    <li>当你希望操作直接反映到原数据上，并且想节省内存时，使用视图。</li>
+  </ul>
+</body>
+
+</html>

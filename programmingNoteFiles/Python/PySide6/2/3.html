@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">3. 样式表</h1>
+  <p>PySide6 支持使用 <strong>Qt Style Sheets (QSS)</strong>，一种类似 CSS 的语法，来极大地美化应用程序的外观。</p>
+  <p><strong>基本用法</strong>：widget.setStyleSheet("qss代码")</p>
+  <pre><code># ... 省略之前的导入和app创建代码 ...
+
+window = QMainWindow()
+window.resize(300, 200)
+
+# 创建一个容器和按钮
+central_widget = QWidget()
+window.setCentralWidget(central_widget)
+layout = QVBoxLayout()
+central_widget.setLayout(layout)
+
+button1 = QPushButton("普通按钮")
+button2 = QPushButton("漂亮按钮")
+layout.addWidget(button1)
+layout.addWidget(button2)
+
+# 对单个控件应用样式表
+button2.setStyleSheet("""
+    QPushButton {
+        background-color: #4CAF50; /* 绿色背景 */
+        color: white; /* 白色文字 */
+        border: none; /* 无边框 */
+        padding: 10px; /* 内边距 */
+        font-size: 16px; /* 字体大小 */
+        border-radius: 5px; /* 圆角 */
+    }
+    QPushButton:hover {
+        background-color: #45a049; /* 鼠标悬停时的颜色 */
+    }
+    QPushButton:pressed {
+        background-color: #3d8b40; /* 按钮按下时的颜色 */
+    }
+""")
+
+# 对整个应用程序应用样式表
+# app.setStyleSheet("QPushButton { ... }") 
+
+window.show()
+sys.exit(app.exec())</code></pre>
+  <strong>常用QSS选择器：</strong>
+  <ul>
+    <li><strong>QPushButton</strong>：选择所有 <strong>QPushButton</strong> 实例。</li>
+    <li><strong>QPushButton#objectName</strong>：选择 <strong>objectName</strong> 为指定名称的按钮（在 <strong>Qt Designer</strong>
+      里设置）。</li>
+    <li><strong>QDialog QPushButton</strong>：选择所有位于 <strong>QDialog</strong> 内部的 QPushButton（后代选择器）。</li>
+    <li><strong>QPushButton:hover</strong>：伪状态，鼠标悬停时生效。</li>
+  </ul>
+  <p>技巧：你可以把 QSS 代码写在一个单独的 .qss 文件里，然后在程序中加载，实现样式和代码的完全分离。</p>
+  <pre><code>def load_stylesheet(filename):
+    file = QFile(filename)
+    file.open(QFile.ReadOnly | QFile.Text)
+    stylesheet = file.readAll()
+    file.close()
+    return str(stylesheet, encoding='utf-8')
+
+app.setStyleSheet(load_stylesheet("style.qss"))</code></pre>
+</body>
+
+</html>

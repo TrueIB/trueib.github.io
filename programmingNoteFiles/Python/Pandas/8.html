@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">8. 计算与分组</h1>
+  <dl>
+    <dt>1. 简单计算</dt>
+    <dd>
+      Pandas 可以直接对一列进行数学运算。
+      <pre><code>df['总分'] = df['语文'] + df['数学'] + df['英语'] # 新增一列“总分”
+df['语文平均'] = df['语文'].mean()                # 新增一列，值都是语文平均分</code></pre>
+    </dd>
+    <dt>2. 分组聚合 (Groupby)</dt>
+    <dd>
+      “分组聚合” 就是 “按某个条件分组，然后对每组进行统计”。
+      | 问题：男生和女生的平均数学成绩分别是多少？
+      <pre><code># 假设我们有一列“性别”
+df.groupby('性别')['数学'].mean()</code></pre>
+      <ul>
+        <li><strong>groupby('性别')：</strong>按“性别”分组（比如分成了“男”、“女”两组）</li>
+        <li><strong>['数学']：</strong>我关心的是“数学”这一列</li>
+        <li><strong>.mean()：</strong>对分好的组里的数学成绩求平均值</li>
+      </ul>
+      或者一次性做多个统计：
+      <pre><code>df.groupby('性别')['数学'].agg(['mean', 'count', 'max'])
+# 输出：每个性别的数学平均分、人数、最高分</code></pre>
+    </dd>
+  </dl>
+</body>
+
+</html>

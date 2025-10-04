@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">4. 数组的运算（NumPy 的强大之处）</h1>
+  <p>这是 NumPy 最核心的优势：<strong>无需循环，直接对整个数组进行批量操作。</strong></p>
+  <dl>
+    <dt>1. 数组与标量的运算（广播）</dt>
+    <dd>
+      数组中的每一个元素都会和这个数字进行运算。
+      <pre><code>arr = np.array([1, 2, 3, 4])
+
+print(arr + 2)   # [3 4 5 6]
+print(arr * 3)   # [3 6 9 12]
+print(arr ** 2)  # [ 1  4  9 16] （平方）
+print(1 / arr)   # [1.   0.5    0.333... 0.25]</code></pre>
+    </dd>
+    <dt>2. 数组与数组的运算（对应位置元素相操作）</dt>
+    <dd>
+      要求两个数组的形状（shape）必须一样，或者满足“广播”条件（后面会讲）。
+      <pre><code>a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+print(a + b)  # [5 7 9]  (对应位置相加：1+4， 2+5， 3+6)
+print(a - b)  # [-3 -3 -3]
+print(a * b)  # [4 10 18] （注意这是对应位置相乘，不是矩阵乘法！）
+print(a / b)  # [0.25 0.4  0.5]
+print(a > b)  # [False False False] （比较运算，返回布尔数组）</code></pre>
+    </dd>
+    <dt>3. 常用的数学函数</dt>
+    <dd>
+      NumPy 提供了全套的数学函数，它们都会对数组中的<strong>每一个元素</strong>进行操作。
+      <pre><code>arr = np.array([0, np.pi/2, np.pi]) # [0, π/2, π]
+
+print(np.sin(arr))   # 计算正弦值 [0., 1., 约等于0]
+print(np.sqrt(arr))  # 开平方 [0., 约1.57, 约1.77]
+print(np.exp(arr))   # 计算指数e^x [1., 约4.81, 约23.14]
+print(np.log(arr+1)) # 计算自然对数（ln），+1防止对0取对数
+
+arr2 = np.array([1.2, 3.7, 5.1])
+print(np.floor(arr2)) # 向下取整 [1. 3. 5.]
+print(np.ceil(arr2))  # 向上取整 [2. 4. 6.]
+print(np.round(arr2)) # 四舍五入 [1. 4. 5.]</code></pre>
+    </dd>
+    <dt>4. 聚合函数（把很多数变成一个数）</dt>
+    <dd>
+      <pre><code>arr = np.arange(1, 11) # [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+print(np.sum(arr))     # 求和，输出：55
+print(np.mean(arr))    # 求平均值，输出：5.5
+print(np.std(arr))     # 求标准差
+print(np.var(arr))     # 求方差
+print(np.min(arr))     # 求最小值，输出：1
+print(np.max(arr))     # 求最大值，输出：10
+print(np.argmin(arr))  # 求最小值的索引位置，输出：0
+print(np.argmax(arr))  # 求最大值的索引位置，输出：9
+
+# 对于二维数组，可以指定轴
+arr2d = np.array([[1, 2], [3, 4], [5, 6]])
+print(np.sum(arr2d, axis=0)) # 对每一列求和，输出：[ 9 12] (1+3+5, 2+4+6)
+print(np.sum(arr2d, axis=1)) # 对每一行求和，输出：[3 7 11] (1+2, 3+4, 5+6)</code></pre>
+    </dd>
+  </dl>
+</body>
+
+</html>

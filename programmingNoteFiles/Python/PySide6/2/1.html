@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">1. Model/View 架构</h1>
+  <p>当你需要显示列表、表格或树形等结构化数据时，手动操作每个控件会非常麻烦。PySide6 提供了 <strong>Model/View（模型/视图）</strong> 架构来解决这个问题。</p>
+  <ul>
+    <li><strong>模型（Model）</strong>：负责管理数据。它知道数据有多少行、多少列，每个位置的数据是什么。</li>
+    <li><strong>视图（View）</strong>：负责显示数据。它从模型那里获取数据并展示给用户（如列表、表格）。</li>
+    <li><strong>委托（Delegate）</strong>：负责渲染和编辑视图中的每个数据项（可选，用于自定义显示和编辑方式）。</li>
+  </ul>
+  <p>这种架构将数据和显示分离，非常高效和灵活。</p>
+  <strong>示例：使用 QListView 和 QStringListModel 显示列表</strong>
+  <pre><code>from PySide6.QtWidgets import QApplication, QMainWindow, QListView, QVBoxLayout, QWidget, QPushButton, QLineEdit
+from PySide6.QtCore import QStringListModel
+import sys
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Model/View 示例 - 购物清单")
+        self.resize(300, 400)
+
+        # 1. 创建数据模型
+        self.initial_data = ["苹果", "香蕉", "牛奶"]
+        self.model = QStringListModel(self.initial_data)
+
+        # 2. 创建视图，并设置模型
+        self.list_view = QListView()
+        self.list_view.setModel(self.model) # 关键一步：将视图和模型关联
+
+        # 3. 创建其他控件
+        self.line_edit = QLineEdit()
+        self.line_edit.setPlaceholderText("输入要添加的商品...")
+        self.add_button = QPushButton("添加")
+        self.delete_button = QPushButton("删除选中项")
+
+        # 4. 连接信号槽
+        self.add_button.clicked.connect(self.add_item)
+        self.delete_button.clicked.connect(self.delete_item)
+        self.line_edit.returnPressed.connect(self.add_item) # 按回车也可添加
+
+        # 5. 布置布局
+        central_widget = QWidget()
+        self.setCentralWidget(central_widget)
+        layout = QVBoxLayout()
+        layout.addWidget(self.list_view)
+        layout.addWidget(self.line_edit)
+        layout.addWidget(self.add_button)
+        layout.addWidget(self.delete_button)
+        central_widget.setLayout(layout)
+
+    def add_item(self):
+        text = self.line_edit.text().strip()
+        if text: # 如果输入不为空
+            # 获取当前模型中的数据
+            current_list = self.model.stringList()
+            # 添加新数据
+            current_list.append(text)
+            # 将新列表设置回模型
+            self.model.setStringList(current_list)
+            # 清空输入框
+            self.line_edit.clear()
+
+    def delete_item(self):
+        # 获取视图中当前选中的行的索引
+        indexes = self.list_view.selectedIndexes()
+        if indexes:
+            # 获取选中的第一行的索引（QModelIndex）
+            index = indexes[0]
+            # 通过模型删除该行
+            self.model.removeRow(index.row())
+
+app = QApplication(sys.argv)
+window = MainWindow()
+window.show()
+sys.exit(app.exec())</code></pre>
+  <strong>关键点：</strong>
+  <ul>
+    <li>我们不需要手动操作 <strong>QListView</strong> 来添加或删除项目，我们只操作<strong>模型</strong> (<strong>self.model</strong>)。</li>
+    <li>模型发生变化后，视图会自动更新。这就是 <strong>Model/View</strong> 的强大之处。</li>
+    <li>对于表格数据，可以使用 <strong>QTableView</strong> 和 <strong>QStandardItemModel</strong>。对于树形数据，可以使用 <strong>QTreeView</strong> 和 <strong>QStandardItemModel</strong>。</li>
+  </ul>
+</body>
+
+</html>

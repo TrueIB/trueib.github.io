@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">10. 时间序列处理</h1>
+  <p>Pandas 处理时间数据也是一把好手。</p>
+  <pre><code># 将字符串转为时间类型
+df['日期列'] = pd.to_datetime(df['日期列'])
+
+# 设为索引后，方便按时间筛选
+df.set_index('日期列', inplace=True)
+df['2023']        # 获取2023年所有数据
+df['2023-01':'2023-03'] # 获取2023年1月到3月的数据
+
+# 按时间重采样（Resample），比如按周求和
+df.resample('W').sum()</code></pre>
+</body>
+
+</html>

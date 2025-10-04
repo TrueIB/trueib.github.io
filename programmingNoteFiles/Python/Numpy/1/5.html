@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">5. 数组形状操作</h1>
+  <dl>
+    <dt>1. 改变形状（reshape）</dt>
+    <dd>
+      reshape 是一个非常常用的方法，它不改变数据本身，只是改变数据的视图（View）。
+      <pre><code>arr = np.arange(12) # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+print(arr)
+
+# 把它变成一个3行4列的矩阵
+arr_2d = arr.reshape(3, 4)
+print(arr_2d)
+# [[ 0  1  2  3]
+#  [ 4  5  6  7]
+#  [ 8  9 10 11]]
+
+# 注意：新形状的总元素数必须和原来一样！3*4=12，没问题。
+# arr.reshape(3, 5) # 这会报错，因为3*5=15 != 12
+
+# 变成三维数组
+arr_3d = arr.reshape(2, 3, 2)
+print(arr_3d)
+
+# 一个常用的技巧：-1 表示自动计算该维度的大小
+arr_auto = arr.reshape(3, -1) # 我知道要3行，列数你帮我算一下（12/3=4）
+print(arr_auto) # 结果和arr_2d一样</code></pre>
+    </dd>
+    <dt>2. 展平数组（flatten 或 ravel）</dt>
+    <dd>
+      把多维数组变回一维。
+      <pre><code>arr_2d = np.array([[1, 2], [3, 4]])
+arr_flat = arr_2d.flatten() # 或者 arr_2d.ravel()
+print(arr_flat) # [1 2 3 4]</code></pre>
+      flatten() 返回的是副本（拷贝），修改它不影响原数组。
+      ravel() 返回的是视图（引用），修改它会影响原数组。
+    </dd>
+  </dl>
+</body>
+
+</html>

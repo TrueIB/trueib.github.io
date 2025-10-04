@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">4. 布局管理</h1>
+  <p>手动拖拽控件并设置固定位置（绝对定位）有个问题：当窗口大小变化时，控件不会自适应。解决这个问题的神器就是<strong>布局（Layout）</strong>。</p>
+  <p>在 Qt Designer 里，你可以在空白处右键，或者使用顶部的布局工具栏：</p>
+  <ul>
+    <li><strong>Vertical Layout（垂直布局）</strong>：控件按从上到下的顺序排列。</li>
+    <li><strong>Horizontal Layout（水平布局）</strong>：控件按从左到右的顺序排列。</li>
+    <li><strong>Grid Layout（网格布局）</strong>：控件放在一个网格里。</li>
+  </ul>
+  <strong>使用方法（在 Qt Designer 中）：</strong>
+  <ol>
+    <li>选中想一起布局的几个控件（按住 Ctrl 多选）。</li>
+    <li>点击工具栏上对应的布局按钮（或者右键 -> 布局）。</li>
+    <li>还可以进行<strong>嵌套布局</strong>，比如先对两个控件用水平布局，再把这个水平布局和另一个控件一起放进一个垂直布局里。</li>
+  </ol>
+  <p>使用布局后，控件会自动随着窗口大小变化而调整位置和大小，这才是现代 GUI 应用的做法。</p>
+</body>
+
+</html>

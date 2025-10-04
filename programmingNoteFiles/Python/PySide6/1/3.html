@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+  <h1 class="h">3. 拖拽设计界面</h1>
+  <p>手写代码来定位按钮（button.move(150, 130)）非常不方便，尤其是界面复杂的时候。Qt 提供了一个强大的可视化工具 <strong>Qt Designer</strong> 来帮助我们设计界面。</p>
+  <dl>
+    <dt>1. 启动 Qt Designer</dt>
+    <dd>
+      安装 PySide6 后，Qt Designer 会自动安装。在命令行输入：
+      <pre><code>pyside6-designer</code></pre>
+      回车后就会打开它。
+    </dd>
+    <dt>2. 创建界面</dt>
+    <dd>
+      <ol>
+        <li>弹出一个对话框，让你选模板。我们选择默认的 <strong>Main Window</strong>，然后点击 <strong>Create</strong>。</li>
+        <li>左边是 <strong>Widget Box</strong>，里面有各种各样的控件（按钮、文本框、列表等），你可以直接拖拽到中间的窗体上。</li>
+        <li>右边是 <strong>Property Editor</strong>，可以修改选中控件的各种属性（如对象名、大小、文字等）。</li>
+      </ol>
+      <strong>我们来做个简单的：</strong>
+      <ul>
+        <li>从左边拖一个 <strong>Push Button</strong> 到窗体上。</li>
+        <li>再拖一个 <strong>Label</strong>（文本标签）到窗体上。</li>
+        <li>随便调整一下它们的位置和大小。</li>
+        <li>点击一下按钮，在右边的属性编辑器里，找到 <strong>text</strong> 属性，把它改成“点击”。</li>
+        <li>点击一下标签，把它 <strong>text</strong> 属性里的 <strong>TextLabel</strong> 清空（让它初始为空）。</li>
+      </ul>
+    </dd>
+    <dt>3. 保存并生成 Python 代码</dt>
+    <dd>
+      <ol>
+        <li>按 <strong>Ctrl+S</strong> 保存这个界面文件，我们把它命名为 <strong>my_ui.ui</strong>。这个 <strong>.ui</strong> 文件是 XML 格式的，描述了界面的结构。</li>
+        <li>
+          <strong>现在，我们需要把这个 .ui 文件转换成 Python 代码</strong>。打开命令行，进入到 my_ui.ui 所在的目录，运行：
+          <pre><code>pyside6-uic ui.ui -o ui.py</code></pre>
+          这条命令会生成一个名为 <strong>ui_mywindow.py</strong> 的 Python 文件，里面包含了创建我们刚才设计的界面的所有代码。
+        </li>
+      </ol>
+    </dd>
+    <dt>4. 在主程序中使用设计好的界面</dt>
+    <dd>
+      现在我们不再需要手动创建按钮和标签了，而是直接使用生成的那个类。
+      创建一个新的主程序文件，比如叫 <strong>main.py</strong>：
+      <pre><code>from PySide6.QtWidgets import QApplication, QMainWindow
+# 导入我们从 .ui 文件生成出来的类
+from ui_mywindow import Ui_MainWindow
+import sys
+
+# 创建一个新的主窗口类，它同时继承自 QMainWindow 和我们生成的界面类 Ui_MainWindow
+class MyMainWindow(QMainWindow, Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        # 调用 setupUi 方法，这个方法在 Ui_MainWindow 里，它负责创建和布置所有控件。
+        self.setupUi(self)
+        # 现在，所有控件都已经创建好了，它们的对象名就是在 Qt Designer 里设置的。
+        # 比如我们的按钮，它的默认对象名可能是 "pushButton"
+        # 我们的标签，默认对象名可能是 "label"
+
+        # 为按钮连接信号和槽
+        # 注意：self.pushButton 就是这个按钮对象，我们在代码里可以直接用了！
+        self.pushButton.clicked.connect(self.on_button_click)
+
+    # 定义一个槽函数
+    def on_button_click(self):
+        # 当按钮被点击时，我们改变标签的文字
+        self.label.setText("你好，世界！")
+
+app = QApplication(sys.argv)
+window = MyMainWindow()
+window.show()
+sys.exit(app.exec())</code></pre>
+      运行 main.py，点击按钮，标签的文字会变成“你好，世界！”。
+      <strong>这样做的好处：</strong>
+      <ul>
+        <li><strong>界面和逻辑分离</strong>：设计师用 Qt Designer 做界面，程序员用 Python 写业务逻辑。</li>
+        <li><strong>开发效率极高</strong>：复杂的界面用拖拽的方式比写代码快得多。</li>
+        <li><strong>修改方便</strong>：改界面不用动代码，只需在 Qt Designer 里调整，重新生成 .py 文件即可。</li>
+      </ul>
+    </dd>
+  </dl>
+</body>
+
+</html>
