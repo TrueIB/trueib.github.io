@@ -53,6 +53,12 @@ code {
   color: var(--textColor);
 }
 
+.a {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 a {
   color: blue;
 }

@@ -87,8 +87,7 @@ strong {
   left: 2.2rem;
 }
 
-.tree-node-container,
-.main-container {
+.tree-node-container {
   display: flex;
   flex-direction: row;
   align-items: center;
