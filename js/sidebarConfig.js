@@ -1,5 +1,5 @@
 const sidebarTitlesArray = [
-  [true, '💻 网站首页', "replace('main.html'); "],
+  [true, '💻 网站首页', "replace('home.html'); "],
   [false, '📝 个人项目', [
     [true, '📄 小学成长纪念册', "replace('projects/q61.html')"]
   ]],
@@ -112,6 +112,11 @@ const sidebarTitlesArray = [
       [true, '📘 暂无笔记', ""]
     ]]]],
   [true, '💬 联系方式', "replace('contact.html'); "],
+  [false, '💻 其他工具', [
+    [false, '📒 英语单词本', [
+      [true, '📘 2025年下', "replace('other/words-notebook/2025-1.html'); "]
+    ]]
+  ]],
   [false, '📄 帮助文档', [
     [true, '📋 更新日志', "replace('help/log.html'); "],
     [true, '📜 开源许可', "replace('help/license.html'); "]
@@ -196,7 +201,7 @@ function subjectConfig() {
   document.documentElement.setAttribute('data-subject', subject);
   subjectButton.innerHTML = subject == 'light' ? '☀️' : '🌙';
   localStorage.setItem('trueib-subject', subject);
-  sendSubjectToIframe()
+  sendSubjectToIframe();
 }
 
 function sendSubjectToIframe() {
@@ -204,14 +209,14 @@ function sendSubjectToIframe() {
   iframe.contentWindow.postMessage({
     type: 'THEME_CHANGE',
     subject: subject
-  }, window.location.origin);
+  }, "*");
 }
 
 
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.querySelector('body');
   if (urlObject.searchParams.get('page') == null) {
-    urlObject.searchParams.set('page', 'main.html');
+    urlObject.searchParams.set('page', 'home.html');
     body.innerHTML = '';
     window.location.replace(urlObject.toString());
   } else {

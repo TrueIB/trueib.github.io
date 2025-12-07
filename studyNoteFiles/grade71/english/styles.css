@@ -1,0 +1,153 @@
+:root {
+  --backgroundColor1: white;
+  --backgroundColor2: #eeeeee;
+  --textColor: black;
+  --borderColor: black;
+  --backgroundColor1-hover: black;
+  --textColor-hover: white;
+  --borderColor-hover: white;
+}
+
+[data-subject="dark"] {
+  --backgroundColor1: #222;
+  --backgroundColor2: black;
+  --textColor: white;
+  --borderColor: white;
+  --backgroundColor1-hover: white;
+  --textColor-hover: black;
+  --borderColor-hover: black;
+}
+
+body {
+  font-size: 1.5rem;
+  font-family: 	KaiTi, STKaiti, FangSong, STFangSong;
+  background-color: var(--backgroundColor1);
+  color: var(--textColor);
+}
+
+.footer {
+  color: grey;
+  background-color: var(--backgroundColor2);
+  padding-top: 4rem;
+  padding-left: 1rem;
+  height: 3rem;
+}
+
+.h {
+  text-align: center;
+} 
+
+pre {
+  background-color: var(--backgroundColor2);
+  color: var(--textColor);
+  border-radius: 0.5rem;
+  padding-left: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--borderColor);
+}
+
+code {
+  font-family: Consolas, 'Courier New', monospace;
+  color: var(--textColor);
+}
+
+a {
+  color: blue;
+}
+
+strong {
+  font-weight: 900;
+}
+
+.red {
+  color: red;
+}
+
+.blue {
+  color: blue;
+}
+
+.main-tree {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  padding: 0;
+  position: relative;
+}
+
+.tree {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  padding: 0;
+  position: relative;
+  border-left: 2px solid #4db6ac;
+  left: 2.2rem;
+}
+
+.tree-node-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  padding: 0 20px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.node {
+  background: #e0f7fa;
+  border: 2px solid #4db6ac;
+  border-radius: 8px;
+  padding: 0.5rem 0.8rem;
+  text-align: center;
+  z-index: 2;
+  color: black;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 980px) {
+  body {
+    font-size: 1.2rem;
+  }
+
+  .node {
+    font-size: 1rem;
+  }
+
+  h1.h {
+    font-size: 2.4rem;
+  }
+
+  h3.h {
+    font-size: 1.6rem;
+  }
+
+  .footer {
+    height: 2.5rem;
+  }
+}
+
+@media (max-width: 798px) {
+  body {
+    font-size: 1rem;
+  }
+
+  .node {
+    font-size: 0.9rem;
+  }
+
+  h1.h {
+    font-size: 2rem;
+  }
+
+  h3.h {
+    font-size: 1.2rem;
+  }
+
+  .footer {
+    height: 2rem;
+  }
+}

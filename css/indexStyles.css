@@ -18,7 +18,7 @@
 
 body {
   font-size: 1.5rem;
-  font-family: 	KaiTi, STKaiti, FangSong, STFangSong;
+  font-family: KaiTi, STKaiti, FangSong, STFangSong;
   color: var(--textColor);
   overflow: hidden;
   background-color: var(--backgroundColor1);
@@ -64,6 +64,10 @@ body {
   width: 100%;
   height: 10%;
   z-index: 998;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .li {
@@ -94,6 +98,10 @@ body {
   border-radius: 0.2rem;
   border-color: var(--borderColor);
   overflow: auto;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .sidebar ul {
