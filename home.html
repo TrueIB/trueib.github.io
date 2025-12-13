@@ -5,13 +5,357 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link type="text/css" rel="stylesheet" href="css/mainStyles.css">
+  <style type="text/css">
+    #image {
+      width: 90%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    #type-text {
+      font-family: 'Courier New', monospace;
+      font-size: 2rem;
+      overflow: hidden;
+      border-right: 3px solid #333;
+      margin: 0 auto;
+      text-align: center;
+      width: fit-content;
+      animation:
+        blink-caret 0.75s step-end infinite;
+    }
+
+    #word1 {
+      animation: word1-loop 6s;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes word1-loop {
+      0% {
+        display: none;
+      }
+
+      9% {
+        display: none;
+      }
+
+      10% {
+        display: inline;
+      }
+
+      90% {
+        display: none;
+      }
+
+      100% {
+        display: none;
+      }
+    }
+
+    #word2 {
+      animation: word2-loop 6s;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes word2-loop {
+      0% {
+        display: none;
+      }
+
+      10% {
+        display: none;
+      }
+
+      11% {
+        display: inline;
+      }
+
+      89% {
+        display: none;
+      }
+
+      100% {
+        display: none;
+      }
+    }
+
+    #word3 {
+      animation: word3-loop 6s;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes word3-loop {
+      0% {
+        display: none;
+      }
+
+      11% {
+        display: none;
+      }
+
+      12% {
+        display: inline;
+      }
+
+      88% {
+        display: none;
+      }
+
+      100% {
+        display: none;
+      }
+    }
+
+    #word4 {
+      animation: word4-loop 6s;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes word4-loop {
+      0% {
+        display: none;
+      }
+
+      12% {
+        display: none;
+      }
+
+      13% {
+        display: inline;
+      }
+
+      87% {
+        display: none;
+      }
+
+      100% {
+        display: none;
+      }
+    }
+
+    #word5 {
+      animation: word5-loop 6s;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes word5-loop {
+      0% {
+        display: none;
+      }
+
+      13% {
+        display: none;
+      }
+
+      14% {
+        display: inline;
+      }
+
+      86% {
+        display: none;
+      }
+
+      100% {
+        display: none;
+      }
+    }
+
+    #word6 {
+      animation: word6-loop 6s;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes word6-loop {
+      0% {
+        display: none;
+      }
+
+      14% {
+        display: none;
+      }
+
+      15% {
+        display: inline;
+      }
+
+      85% {
+        display: none;
+      }
+
+      100% {
+        display: none;
+      }
+    }
+
+    #word7 {
+      animation: word7-loop 6s;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes word7-loop {
+      0% {
+        display: none;
+      }
+
+      15% {
+        display: none;
+      }
+
+      16% {
+        display: inline;
+      }
+
+      84% {
+        display: none;
+      }
+
+      100% {
+        display: none;
+      }
+    }
+
+    #word8 {
+      animation: word8-loop 6s;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes word8-loop {
+      0% {
+        display: none;
+      }
+
+      16% {
+        display: none;
+      }
+
+      17% {
+        display: inline;
+      }
+
+      83% {
+        display: none;
+      }
+
+      100% {
+        display: none;
+      }
+    }
+
+    #word9 {
+      animation: word9-loop 6s;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes word9-loop {
+      0% {
+        display: none;
+      }
+
+      17% {
+        display: none;
+      }
+
+      18% {
+        display: inline;
+      }
+
+      82% {
+        display: none;
+      }
+
+      100% {
+        display: none;
+      }
+    }
+
+    #word10 {
+      animation: word10-loop 6s;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes word10-loop {
+      0% {
+        display: none;
+      }
+
+      18% {
+        display: none;
+      }
+
+      19% {
+        display: inline;
+      }
+
+      81% {
+        display: none;
+      }
+
+      100% {
+        display: none;
+      }
+    }
+
+    #word11 {
+      animation: word11-loop 6s;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes word11-loop {
+      0% {
+        display: none;
+      }
+
+      19% {
+        display: none;
+      }
+
+      20% {
+        display: inline;
+      }
+
+      80% {
+        display: none;
+      }
+
+      100% {
+        display: none;
+      }
+    }
+
+    @keyframes blink-caret {
+
+      from,
+      to {
+        border-color: transparent
+      }
+
+      50% {
+        border-color: var(--textColor);
+      }
+    }
+  </style>
 </head>
 
 <body>
   <h1 class="h">TrueIB的个人网站</h1>
-  <h3 class="h"><a href="https://gitcode.com/TrueIB/trueib.github.io" target="_blank">TrueIB/trueib.github.io</a></h3>
-  <p class="h">基于HTML界面、JavaScript程序和CSS样式，依托 GitHub Pages构建</p>
-  <div id="image"></div>
+  <p style="text-align: center;">点击左上角“☰”图标开始</p>
+  <p id="type-text">
+    <span style="visibility: hidden;">|</span><!--
+ --><span id="word1">欢</span><!--
+ --><span id="word2">迎</span><!--
+ --><span id="word3">来</span><!--
+ --><span id="word4">到</span><!--
+ --><span id="word5">我</span><!--
+ --><span id="word6">的</span><!--
+ --><span id="word7">个</span><!--
+ --><span id="word8">人</span><!--
+ --><span id="word9">网</span><!--
+ --><span id="word10">站</span><!--
+ --><span id="word11">！</span>
+  </p>
+  <br>
+  <br>
+  <img id="image"></img>
   <br>
   <table class="projects" cellspacing="3">
     <thead>

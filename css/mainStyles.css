@@ -6,7 +6,7 @@
   --backgroundColor1-hover: black;
   --textColor-hover: white;
   --borderColor-hover: white;
-  --image: url("..\\home-light.png");
+  --image: url("home-light.png");
 }
 
 [data-subject="dark"] {
@@ -17,7 +17,7 @@
   --backgroundColor1-hover: white;
   --textColor-hover: black;
   --borderColor-hover: black;
-  --image: url("..\\home-dark.png");
+  --image: url("home-dark.png");
 }
 
 body {
@@ -28,12 +28,6 @@ body {
   display: flex;
   flex-direction: column;
   flex: 1;
-}
-
-#image {
-  background-image: var(--image);
-  width: 90%;
-  height: auto;
 }
 
 .footer {
