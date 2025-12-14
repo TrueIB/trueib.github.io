@@ -3,7 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const body = document.querySelector("body");
   const image = document.querySelector('#image');
   if (image) {
+    if (subject) {
     image.src = `home-${subject}.png`;
+    } else {
+      image.src = 'home-light.png';
+    }
   }
   document.documentElement.setAttribute("data-subject", subject ? subject : "light");
   body.innerHTML += `
